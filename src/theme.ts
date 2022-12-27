@@ -1,4 +1,4 @@
-import { PaletteMode, PaletteOptions } from "@mui/material";
+import { PaletteMode, PaletteOptions, PaletteColor } from "@mui/material";
 // create types for tokensDark and tokensLight
 export type TokensDark = { [key: string]: { [key: string]: string } };
 
@@ -81,14 +81,19 @@ export const themeSettings = (mode: PaletteMode) => {
               ...tokensDark.primary,
               main: tokensDark.primary[400],
               light: tokensDark.primary[400],
+              dark: tokensDark.primary[600],
+
             },
             secondary: {
               ...tokensDark.secondary,
               main: tokensDark.secondary[300],
+              light: tokensDark.secondary[200],
+              contrastText: tokensDark.secondary[100]
             },
-            neutral: {
+            info: {
               ...tokensDark.grey,
               main: tokensDark.grey[500],
+              light: tokensDark.grey[300],
             },
             background: {
               default: tokensDark.primary[600],
@@ -107,7 +112,7 @@ export const themeSettings = (mode: PaletteMode) => {
               main: tokensDark.secondary[600],
               light: tokensDark.secondary[700],
             },
-            neutral: {
+            info: {
               ...tokensLight.grey,
               main: tokensDark.grey[500],
             },

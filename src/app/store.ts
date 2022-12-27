@@ -8,9 +8,10 @@ import {
   Reducer,
 } from "@reduxjs/toolkit";
 import globalReducer from "../features/global/globalSlice";
-
+import { api } from "./api";
 
 const reducers = {
+  [api.reducerPath]: api.reducer,
   global: globalReducer,
 };
 
@@ -25,9 +26,11 @@ export const store = configureStore({
   reducer: reducers,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
-        // Add your middleware here. For example, you can add
-        // a Redux Thunk middleware to handle async logic:
-        // thunkMiddleware,
+      // Add your middleware here. For example, you can add
+      // a Redux Thunk middleware to handle async logic:
+      // thunkMiddleware,
+      // For other middleware, see https://redux-toolkit.js.org/api/getDefaultMiddleware
+      api.middleware,
     ]),
   devTools: process.env.NODE_ENV !== "production",
 });
@@ -44,5 +47,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action
 >;
-
-
