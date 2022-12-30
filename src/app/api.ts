@@ -16,7 +16,7 @@ import { User, Product } from "../features/global/globalSlice";
 export const api = createApi({
   reducerPath: "adminApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5001/api/v1" }),
-  tagTypes: ["User", "Product", "Customers", "Transactions", "Geography"],
+  tagTypes: ["User", "Product", "Customers", "Transactions", "Geography", "Sales"],
   endpoints: (builder) => ({
     getUser: builder.query<User, string>({
       query: (id: string) => `/general/user/${id}`,
@@ -45,6 +45,10 @@ export const api = createApi({
       query: () => `/client/geography`,
       providesTags: ["Geography"],
     }),
+    getSales: builder.query<any, void>({
+      query: () => `/sales`,
+      providesTags: ["Sales"],
+    }),
   }),
 });
 
@@ -56,4 +60,5 @@ export const {
   useGetCustomersQuery,
   useGetTransactionsQuery,
   useGetGeographyQuery,
+  useGetSalesQuery,
 } = api;
