@@ -5,6 +5,7 @@ import Header from "./Header";
 import ProductComponent from "./Product";
 import DataGridCustomToolbar from "./DataGridCustomToolbar";
 import OverviewChart from "./OverviewChart";
+import BreakdownChart from "./BreakdownChart";
 
 export {
     FlexBetween,
@@ -14,4 +15,5 @@ export {
     ProductComponent,
     DataGridCustomToolbar,
     OverviewChart,
+    BreakdownChart,
 }

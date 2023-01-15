@@ -25,21 +25,21 @@ function OverviewChart({ view, isDashboard }: OverviewChartProps) {
   const [totalSalesLine, totalUnitsLine] = useMemo(() => {
     if (!sales) return [];
     const { monthlyData }: { monthlyData: MonthlyData[]} = sales;
+    const totalSalesLine: Serie = {
+      id: "totalSales",
+      color: theme.palette.secondary.main,
+      data: [] as Array<{ x: string; y: number }>,
+    };
+    const totalUnitsLine: Serie = {
+      id: "totalUnits",
+      color: theme.palette.secondary.dark,
+      data: [] as Array<{ x: string; y: number }>,
+    };
     
     Object.values(monthlyData).reduce(
       (acc, { month, totalSales, totalUnits }) => {
         const currentSales = acc.sales + totalSales;
         const currentUnits = acc.units + totalUnits;
-        const totalSalesLine: Serie = {
-          id: "totalSales",
-          color: theme.palette.secondary.main,
-          data: [] as Array<{ x: string; y: number }>,
-        };
-        const totalUnitsLine: Serie = {
-          id: "totalUnits",
-          color: theme.palette.secondary.dark,
-          data: [] as Array<{ x: string; y: number }>,
-        };
 
         totalSalesLine.data = [
           ...totalSalesLine.data,
@@ -54,14 +54,14 @@ function OverviewChart({ view, isDashboard }: OverviewChartProps) {
       },
       { sales: 0, units: 0 }
     );
-    return [totalSalesLine, totalUnitsLine];
+    return [[totalSalesLine], [totalUnitsLine]];
   }, [sales]);
 
-  if (!sales && isLoading) return <div>Loading...</div>;
+  if (!sales || isLoading) return <div>Loading...</div>;
 
   return (
     <ResponsiveLine
-      data={view === "sales" ? (totalSalesLine): (totalUnitsLine)}
+      data={view === "sales" ? (totalSalesLine as Serie[]): (totalUnitsLine as Serie[])}
       theme={{
         axis: {
           domain: {

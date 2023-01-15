@@ -15,7 +15,7 @@ import { User, Product } from "../features/global/globalSlice";
 // Define a service using a base URL and expected endpoints
 export const api = createApi({
   reducerPath: "adminApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5001/api/v1" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5002/api/v1" }),
   tagTypes: ["User", "Product", "Customers", "Transactions", "Geography", "Sales"],
   endpoints: (builder) => ({
     getUser: builder.query<User, string>({
